@@ -1,24 +1,247 @@
-/* intuitivnejší box-sizing */
 html { box-sizing: border-box; }
 *, ::after, ::before { box-sizing: inherit; }
 
-/*
-	BARVY
-	#f5f5f5					šedé pozadí stránky
-	#629fe0					modrá čárka
-	Jedeme retro černobíle (až na tu modrou), dnes další barvy nepotřebujeme.
-
-	FONTY
-	Merriweather		základní font na stránce
-	Raleway					nadpisy a menu
-	Oba fonty jsou dostupné na Google Fonts.
-*/
+:root {
+	--background-color: #f5f5f5;				
+	--line-color: #629fe0;					
+	--main-font: 'Merriweather', serif;
+	--second-font: 'Raleway', sans-serif;
+}
 
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #f5f5f5;
+	background-color: var(--background-color);
+	font-family: var(--main-font);
 	font-size: 16px;
 	line-height: 1.6;
 }
 
+.heading,
+.article__heading {
+	font-family: var(--second-font);
+	font-weight: 700;
+	margin: 0 0 16px 0;
+}
+
+.site-header {
+	background-image: url(images/island-hlavicka.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;	
+	color: white;
+}
+
+.wrapper {
+	padding: 32px;
+	background-image: linear-gradient(180deg, #0000001a 0%, #0000008b 100%);
+}
+
+.heading {
+	font-size: 48px;
+	text-align: center;
+}
+
+.text {
+	text-align: center;
+}
+
+.author {
+	text-align: center;
+	color: silver;
+	font-style: italic;
+}
+
+.author::before {
+	content:"";
+	display: block;
+	width: 80px;
+	height: 2px;
+	background-color: silver;
+	margin: 32px auto;
+}
+
+.site-navigation {
+	margin: 32px 0;
+}
+
+.menu {
+	text-align: center;
+	list-style: none;
+	padding: 0;
+	text-transform: uppercase;
+	font-family: var(--second-font);
+}
+
+.menu__link {
+	display: block;
+	color: gray;
+	text-decoration: none;
+	padding: 8px;
+	border-bottom: 1px solid silver;
+}
+
+.article {
+	margin-top: 32px;
+}
+
+.article__text {
+	padding: 8px 32px;
+	margin: 0;
+}
+
+.article__photo {
+	display: block;
+	margin: 23px auto 0 auto;
+	max-width: 100%;
+}
+
+.article__photo-author,
+.article__photo-link {
+	text-align: center;
+	color: gray;
+}
+
+.article__heading {
+	font-size: 32px;
+	padding: 8px 32px;
+}
+
+.article__heading::after {
+	content: "";
+	display: block;
+	width: 80px;
+	height: 4px;
+	background-color: var(--line-color);
+	margin: 16px -32px;
+}
+
+.photo {
+	display: block;
+	margin: 23px auto 0 auto;
+	width: 100%;
+}
+
+.photo-author {
+	text-align: center;
+	color: gray;
+}
+
+.photo__link {
+	color: gray;
+}
+
+.site-footer {
+	padding: 32px;
+	background-image: linear-gradient(180deg,#00000020 0%, #00000005 100%);
+	color: gray;
+}
+
+.footer__link {
+	color: gray;
+}
+
+@media screen and (min-width: 540px){
+	.menu {
+		display: flex;
+	}
+	.menu__item {
+		flex: 1;
+	}
+	.menu__link { 
+		border-top: 1px solid silver;
+	}
+	.menu__item:nth-child(1), 
+	.menu__item:nth-child(2),  
+	.menu__item:nth-child(3) { 
+		border-right: 1px solid silver;
+	}
+	.article {
+		position: relative;
+	}
+	.article__photo-author {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding: 8px 32px;
+		color: white;
+	}
+	.article__photo-link {
+		color: white;
+	}
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.gallery-image {
+		position: relative;
+		overflow: hidden;
+	}
+	.photo {
+		display: block;
+		width: 100%;
+		transition: transform 0.3s;
+		margin: 0;
+	}
+	.photo-author {
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		text-align: center;
+		padding: 16px;
+		width: 100%;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		transition: transform 0.3s;
+	}
+	.photo__link {
+		color: white;
+	}
+	.gallery-image:hover .photo-author {
+		transform: translateY(-100%);
+	}
+}
+
+@media screen and (min-width: 960px) {
+	.wrapper {
+		padding: 100px 0;
+		display: grid;
+		grid-template-columns: 1fr 3fr 1fr;
+	}
+	.heading,
+	.text,
+	.author {
+		grid-column: 2;
+	}
+	.heading {
+		font-size: 80px;
+	}
+	.container {
+		max-width: 960px;
+		margin: -100px auto 0 auto;
+		background-color: white;
+	}
+	.menu {
+		flex-direction: column;
+	}
+	.menu__link { 
+		border-top: none;
+		text-align: left;
+		margin-left: 32px;
+	}
+	.menu__item:nth-child(1), 
+	.menu__item:nth-child(2),  
+	.menu__item:nth-child(3) { 
+		border-right: none;
+	}
+	.article-grid {
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+	}
+	.article-grid .article,
+	.grid-wrapper {
+		grid-column: 2;
+	}
+	.gallery {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
